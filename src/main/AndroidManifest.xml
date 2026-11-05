@@ -33,7 +33,7 @@
 		android:theme="@style/Overlays">
 		<service 
 			android:name=".PostureProcessorService" 
-			android:exported="true" />
+			android:exported="false" />
 		
 		<service
 			android:name=".PostureTileService"
