@@ -423,7 +423,7 @@ public class PostureProcessorService : Service(), IHwBinder.DeathRecipient {
         RampLeft(16f);
 
         companion object {
-            infix fun from(value: Float) = PSValue.values().first { it.value == value }
+            infix fun from(value: Float): PSValue? = PSValue.values().firstOrNull { it.value == value }
         }
     }
 
@@ -687,6 +687,10 @@ public class PostureProcessorService : Service(), IHwBinder.DeathRecipient {
         override fun onSensorChanged(event: SensorEvent) {
             
             val sensorValue = PSValue from event.values[0]
+            if (sensorValue == null) {
+                Log.w(TAG, "Ignoring unknown posture sensor value ${event.values[0]}")
+                return
+            }
             // val newPosture = Posture(sensorValue, Rotation from event.values[1].toInt())
             val newPosture = Posture(sensorValue)
 
