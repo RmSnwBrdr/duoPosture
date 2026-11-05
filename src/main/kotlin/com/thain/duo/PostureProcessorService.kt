@@ -498,7 +498,7 @@ public class PostureProcessorService : Service(), IHwBinder.DeathRecipient {
 
         var pt = postureType(newPosture.posture)
 
-        if (pt != 3 || pt != 4 || pt != 5){
+        if (pt != 3 && pt != 4 && pt != 5){
             peekController.hide()
         }
 
