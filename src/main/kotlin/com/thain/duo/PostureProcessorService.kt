@@ -756,7 +756,9 @@ public class PostureProcessorService : Service(), IHwBinder.DeathRecipient {
             val action: String? = intent.getAction()
             if(action == "android.intent.action.ACTION_POWER_CONNECTED" || action == "android.intent.action.ACTION_POWER_DISCONNECTED" ){
                 // Get the current posture, check if it's either Closed and then show if it is one of these.
-                var pt = postureType(currentPosture!!.posture)
+                // No posture reading yet (boot, or sensors off while closed): nothing to decide.
+                val posture = currentPosture ?: return
+                val pt = postureType(posture.posture)
 
                 //Check if the posture is closed or are we a Duo2
                 if(!isDuo2 || pt != 3){
